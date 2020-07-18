@@ -25,7 +25,7 @@ function Square(props) {
     }
   
     render() {
-      const boardSize = 3;
+      const boardSize = 6;
       let squares = [];
       for (let i =0; i < boardSize; ++i) {
         let row = [];
@@ -64,7 +64,7 @@ function Square(props) {
         this.state = {
         history: [
           {
-            squares: Array(9).fill(null)
+            squares: Array(18).fill(null)
           }
         ],
         stepNumber: 0,

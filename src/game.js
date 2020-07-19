@@ -2,62 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function Square(props) {
-  const className = 'square' + (props.highlight ? ' highlight' : '');
-    return (
-      <button className={className} onClick={props.onClick}>
-        {props.value}
-      </button>
-    );
-  } 
-  
-  class Board extends React.Component {
-    renderSquare(i) {
-      const winnerLine = this.props.winnerLine;
-      return (
-        <Square
-          key={i}
-          value={this.props.squares[i]}
-          onClick={() => this.props.onClick(i)}
-          highlight={winnerLine && winnerLine.includes(i)}
-        />
-      );
-    }
-  
-    render() {
-      const boardSize = 6;
-      let squares = [];
-      for (let i =0; i < boardSize; ++i) {
-        let row = [];
-        for (let j = 0; j < boardSize; ++j) {
-          row.push(this.renderSquare(i *boardSize +j));
-        }
-        squares.push(<div key={i} classNam="board-row">{row}</div> );
-      }
-      return (
-        <div>{squares}</div>
-        // <div>
-        //   <div className="board-row">
-        //     {this.renderSquare(0)}
-        //     {this.renderSquare(1)}
-        //     {this.renderSquare(2)}
-        //   </div>
-        //   <div className="board-row">
-        //     {this.renderSquare(3)}
-        //     {this.renderSquare(4)}
-        //     {this.renderSquare(5)}
-        //   </div>
-        //   <div className="board-row">
-        //     {this.renderSquare(6)}
-        //     {this.renderSquare(7)}
-        //     {this.renderSquare(8)}
-        //   </div>
-        // </div>
-      );
-    }
-  }
-  
-  class Game extends React.Component 
+ class Game extends React.Component 
   {
     constructor(props) {
         super(props);
@@ -172,48 +117,3 @@ function Square(props) {
       );
     }
   }
-
-  
-  
-  // ========================================
-  
-  ReactDOM.render(<Game />, document.getElementById("root"));
-  
-  function calculateWinner(squares) {
-    const lines = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ];
-
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c])
-       {
-        return {
-          winner: squares[a],
-          line: lines[i],
-          isDraw: false,
-        };
-      }
-    }
-    let isDraw = true;
-    for (let i = 0; i < squares.length; i++) 
-    {
-      if (squares[i] === null) 
-      {
-        isDraw = false;
-        break;
-      }
-    }
-    return {
-      winner: null,
-      line: null,
-      isDraw: isDraw,
-  };
-}

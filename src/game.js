@@ -1,15 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './index.css';
+import './square';
+import Board from './board';
+import {calculateWinner} from './game-results';
 
- class Game extends React.Component 
+
+class Game extends React.Component 
   {
     constructor(props) {
         super(props);
         this.state = {
         history: [
           {
-            squares: Array(18).fill(null)
+            squares: Array(36).fill(null)
           }
         ],
         stepNumber: 0,
@@ -66,8 +69,8 @@ import './index.css';
       let moves = history.map((step, move) => 
       {
         const latestMoveSquare = step.latestMoveSquare;
-        const col = 1 + latestMoveSquare % 3;
-        const row = 1 + Math.floor(latestMoveSquare / 3);
+        const col = 1 + latestMoveSquare % 6;
+        const row = 1 + Math.floor(latestMoveSquare / 6);
         const desc = move ?
           `Go to move #${move} (${col}, ${row})` :
           'Go to game start';
@@ -117,3 +120,5 @@ import './index.css';
       );
     }
   }
+
+  export default Game;
